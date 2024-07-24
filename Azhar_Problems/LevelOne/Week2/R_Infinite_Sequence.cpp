@@ -61,38 +61,26 @@ ll lcm(ll a, ll b)
   return (ll)(a * b) / gcd(a, b);
 }
 
-void solve(string s)
-{
-  for (int i = 0; i < s.length(); i++)
-  {
-    for (int j = i; j < s.length(); j++)
-    {
-      for (int k = j; k < s.length(); k++)
-      {
-        string num = "";
-        num += s[i];
-        if (j != i)
-          num = num + s[j];
-        if (k != i && k != j)
-          num = num + s[k];
-        int n = stoi(num);
-        if (n % 8 == 0)
-        {
-          cout << "YES" << endl;
-          cout << n << endl;
-          return;
-        }
-      }
-    }
-  }
-
-  cout << "NO" << endl;
-}
-
 int main()
 {
-  string s;
-  cin >> s;
+  ll a, b, c;
 
-  solve(s);
+  cin >> a >> b >> c;
+
+  if (c == 0)
+  {
+    if (a == b)
+      cout << "YES" << endl;
+    else
+      cout << "NO" << endl;
+
+    return (0);
+  }
+
+  double x = (double)(b - a) / (double)(c);
+
+  if (x >= 0 && x - (ll)x < 1e-9)
+    cout << "YES" << endl;
+  else
+    cout << "NO" << endl;
 }

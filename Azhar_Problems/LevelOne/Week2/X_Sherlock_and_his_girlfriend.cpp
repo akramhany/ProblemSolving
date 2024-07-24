@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <map>
 #include <string>
+#include <set>
+#include <cstring>
 
 #define ll long long
 #define llu unsigned long long
@@ -61,38 +63,47 @@ ll lcm(ll a, ll b)
   return (ll)(a * b) / gcd(a, b);
 }
 
-void solve(string s)
+void sieve(vector<int> &v, int n)
 {
-  for (int i = 0; i < s.length(); i++)
+  v[0] = v[1] = 0;
+  llu i = 2;
+
+  while (i * i <= n)
   {
-    for (int j = i; j < s.length(); j++)
+    if (v[i] == 0)
     {
-      for (int k = j; k < s.length(); k++)
+      llu k = i * i;
+      while (k <= n)
       {
-        string num = "";
-        num += s[i];
-        if (j != i)
-          num = num + s[j];
-        if (k != i && k != j)
-          num = num + s[k];
-        int n = stoi(num);
-        if (n % 8 == 0)
-        {
-          cout << "YES" << endl;
-          cout << n << endl;
-          return;
-        }
+        v[k] = 1;
+        k += i;
       }
     }
+    i++;
   }
-
-  cout << "NO" << endl;
 }
 
 int main()
 {
-  string s;
-  cin >> s;
+  int n;
+  cin >> n;
+  n++;
 
-  solve(s);
+  vector<int> v(100005, 0);
+  sieve(v, 100005);
+
+  if (n - 1 == 1 || n - 1 == 2)
+    cout << "1\n";
+  else
+    cout << "2\n";
+
+  for (int i = 2; i <= n; i++)
+  {
+    if (v[i] == 0)
+      cout << "1" << " ";
+    else
+      cout << "2" << " ";
+  }
+
+  cout << "\n";
 }

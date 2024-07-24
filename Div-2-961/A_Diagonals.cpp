@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <map>
 #include <string>
+#include <set>
+#include <cstring>
 
 #define ll long long
 #define llu unsigned long long
@@ -61,38 +63,45 @@ ll lcm(ll a, ll b)
   return (ll)(a * b) / gcd(a, b);
 }
 
-void solve(string s)
-{
-  for (int i = 0; i < s.length(); i++)
-  {
-    for (int j = i; j < s.length(); j++)
-    {
-      for (int k = j; k < s.length(); k++)
-      {
-        string num = "";
-        num += s[i];
-        if (j != i)
-          num = num + s[j];
-        if (k != i && k != j)
-          num = num + s[k];
-        int n = stoi(num);
-        if (n % 8 == 0)
-        {
-          cout << "YES" << endl;
-          cout << n << endl;
-          return;
-        }
-      }
-    }
-  }
-
-  cout << "NO" << endl;
-}
-
 int main()
 {
-  string s;
-  cin >> s;
+  int t;
+  cin >> t;
 
-  solve(s);
+  while (t--)
+  {
+    int n, k;
+    cin >> n >> k;
+
+    if (k == 0)
+    {
+      cout << 0 << endl;
+      continue;
+    }
+
+    if (n >= k)
+    {
+      cout << 1 << endl;
+      continue;
+    }
+
+    k -= n;
+
+    int c = 1;
+    n--;
+
+    while (k > 0)
+    {
+      k -= n;
+      c++;
+      if (k <= 0)
+        break;
+
+      k -= n;
+      c++;
+      n--;
+    }
+
+    cout << c << "\n";
+  }
 }

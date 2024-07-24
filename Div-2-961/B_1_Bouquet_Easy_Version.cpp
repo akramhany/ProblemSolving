@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <map>
 #include <string>
+#include <set>
+#include <cstring>
 
 #define ll long long
 #define llu unsigned long long
@@ -61,38 +63,44 @@ ll lcm(ll a, ll b)
   return (ll)(a * b) / gcd(a, b);
 }
 
-void solve(string s)
-{
-  for (int i = 0; i < s.length(); i++)
-  {
-    for (int j = i; j < s.length(); j++)
-    {
-      for (int k = j; k < s.length(); k++)
-      {
-        string num = "";
-        num += s[i];
-        if (j != i)
-          num = num + s[j];
-        if (k != i && k != j)
-          num = num + s[k];
-        int n = stoi(num);
-        if (n % 8 == 0)
-        {
-          cout << "YES" << endl;
-          cout << n << endl;
-          return;
-        }
-      }
-    }
-  }
-
-  cout << "NO" << endl;
-}
-
 int main()
 {
-  string s;
-  cin >> s;
+  int t;
+  cin >> t;
 
-  solve(s);
+  while (t--)
+  {
+    llu n, m;
+    cin >> n >> m;
+
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+      cin >> v[i];
+
+    sort(v.begin(), v.end());
+
+    llu maxSum = 0, currSum = 0;
+
+    int start = 0, end = 0;
+
+    while (end < n)
+    {
+      currSum += v[end];
+      while (((v[end] - v[start] > 1) || currSum > m) && start < n)
+      {
+        currSum -= v[start];
+        start++;
+      }
+
+      if (start >= n)
+        break;
+
+      if (currSum > maxSum)
+        maxSum = currSum;
+
+      end++;
+    }
+
+    cout << maxSum << endl;
+  }
 }

@@ -63,36 +63,36 @@ ll lcm(ll a, ll b)
 
 void solve(string s)
 {
+  bool containZero = false, isEven = false;
+  int sum = 0;
+
   for (int i = 0; i < s.length(); i++)
   {
-    for (int j = i; j < s.length(); j++)
-    {
-      for (int k = j; k < s.length(); k++)
-      {
-        string num = "";
-        num += s[i];
-        if (j != i)
-          num = num + s[j];
-        if (k != i && k != j)
-          num = num + s[k];
-        int n = stoi(num);
-        if (n % 8 == 0)
-        {
-          cout << "YES" << endl;
-          cout << n << endl;
-          return;
-        }
-      }
-    }
+    int num = s[i] - '0';
+
+    if (num == 0 && !containZero)
+      containZero = true;
+    else if (num % 2 == 0)
+      isEven = true;
+
+    sum += num;
   }
 
-  cout << "NO" << endl;
+  if (sum % 3 == 0 && containZero && isEven)
+    cout << "red" << endl;
+  else
+    cout << "cyan" << endl;
 }
 
 int main()
 {
-  string s;
-  cin >> s;
+  int t;
+  cin >> t;
 
-  solve(s);
+  while (t--)
+  {
+    string s;
+    cin >> s;
+    solve(s);
+  }
 }

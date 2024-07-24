@@ -61,38 +61,38 @@ ll lcm(ll a, ll b)
   return (ll)(a * b) / gcd(a, b);
 }
 
-void solve(string s)
-{
-  for (int i = 0; i < s.length(); i++)
-  {
-    for (int j = i; j < s.length(); j++)
-    {
-      for (int k = j; k < s.length(); k++)
-      {
-        string num = "";
-        num += s[i];
-        if (j != i)
-          num = num + s[j];
-        if (k != i && k != j)
-          num = num + s[k];
-        int n = stoi(num);
-        if (n % 8 == 0)
-        {
-          cout << "YES" << endl;
-          cout << n << endl;
-          return;
-        }
-      }
-    }
-  }
-
-  cout << "NO" << endl;
-}
-
 int main()
 {
-  string s;
-  cin >> s;
+  char x, y;
+  cin >> x >> y;
 
-  solve(s);
+  int n;
+  cin >> n;
+
+  n %= 4;
+
+  char arr[] = {'<', '^', '>', 'v'};
+
+  if (n == 0 || n == 2)
+    cout << "undefined" << endl;
+  else
+  {
+    int indx = -1;
+    if (x == arr[0])
+      indx = 0;
+    else if (x == arr[1])
+      indx = 1;
+    else if (x == arr[2])
+      indx = 2;
+    else if (x == arr[3])
+      indx = 3;
+
+    indx += n;
+    indx %= 4;
+
+    if (arr[indx] == y)
+      cout << "cw" << endl;
+    else
+      cout << "ccw" << endl;
+  }
 }
