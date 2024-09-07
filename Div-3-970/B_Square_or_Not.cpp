@@ -83,4 +83,61 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--) {
+    int n;
+    cin >> n;
+
+    string s;
+    cin >> s;
+
+    double dim = sqrt(n);
+    if (dim - (int)dim > 1e-9) {
+      cout << "No\n";
+      continue;
+    }
+
+    bool isSq = true;
+    int iDim = int(dim);
+    for (int i = 0; i < iDim; i++)
+    {
+      for (int j = 0; j < iDim; j++) {
+        int indx = (i * iDim) + (j);
+        if (i == 0 || i == iDim - 1) {
+          if (s[indx] != '1') {
+            isSq = false;
+            break;
+          }
+        }
+        else if (j == 0 || j == iDim - 1)
+        {
+          if (s[indx] != '1')
+          {
+            isSq = false;
+            break;
+          }
+        }
+        else
+        {
+          if (s[indx] != '0')
+          {
+            isSq = false;
+            break;
+          }
+        }
+      }
+
+
+    if (isSq == false)
+      break;
+    }
+    
+  if (isSq)
+    cout << "Yes\n";
+  else
+    cout << "No\n";
+  }
+
 }

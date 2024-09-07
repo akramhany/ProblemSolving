@@ -9,21 +9,6 @@
 
 #define ll long long
 #define llu unsigned long long
-#define pii pair<int , int>
-#define lp(i, j, n) for (int i = j; i < n; i++)
-#define vi vector<int>
-#define vvi vector<vector<int>>
-#define vll vector<ll>
-#define vch vector<char>
-#define vvll vector<vector<ll>>
-#define vvch vector<vector<char>>
-#define vpi vector<pii>
-#define mp make_pair
-#define all(v) v.begin() , v. end()
-#define MAX 1e4+5
-#define rep(i, v) for(int i =0 ; i<v.size() ; i++)
-#define scn(v) for (auto& i : v)cin >> i;
-#define oo 1e18
 
 using namespace std;
 
@@ -83,4 +68,29 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int n;
+  cin >> n;
+
+  vector<ll> v(n);
+  for (auto & i : v)
+    cin >> i;
+
+  sort(v.begin(), v.end());
+
+  ll minDif = 1e17, l = 0, r = n - 1;
+  while (l < r)
+  {
+    ll diff = abs(v[l] + v[r]);
+    minDif = min(minDif, diff);
+
+    if (abs(v[l]) > abs(v[r]))
+      l++;
+    else
+      r--;
+  }
+
+  for (int i = 0; i < n; i++)
+    minDif = min(minDif, abs(2 * v[i]));
+  
+  cout << minDif << "\n";
 }

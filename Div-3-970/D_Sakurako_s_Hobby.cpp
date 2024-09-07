@@ -83,4 +83,48 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--) {
+    int n;
+    cin >> n;
+
+    vi v(n);
+    scn(v);
+
+    string s;
+    cin >> s;
+
+    map<int, int> paths;
+    map<int, int> paths_vals;
+
+    int currentPath = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+      if (paths.count(i) == 1)
+        continue;
+      
+      int k = i;
+      int path_val = 0;
+      while (paths.count(k) == 0)
+      {
+        paths[k] = currentPath;
+        if (s[k] == '0')
+          path_val++;
+        
+        k = v[k] - 1;
+      }
+
+      paths_vals[currentPath] = path_val;
+      currentPath++;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+      cout << paths_vals[paths[i]] << " ";
+    }
+    cout << endl;
+  }
 }

@@ -6,10 +6,12 @@
 #include <string>
 #include <set>
 #include <cstring>
+#include <queue>
 
 #define ll long long
 #define llu unsigned long long
 #define pii pair<int , int>
+#define pll pair<ll , ll>
 #define lp(i, j, n) for (int i = j; i < n; i++)
 #define vi vector<int>
 #define vvi vector<vector<int>>
@@ -18,8 +20,8 @@
 #define vvll vector<vector<ll>>
 #define vvch vector<vector<char>>
 #define vpi vector<pii>
-#define mp make_pair
-#define all(v) v.begin() , v. end()
+#define vpl vector<pll>
+#define all(v) v.begin() , v.end()
 #define MAX 1e4+5
 #define rep(i, v) for(int i =0 ; i<v.size() ; i++)
 #define scn(v) for (auto& i : v)cin >> i;
@@ -83,4 +85,34 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  ll n, d;
+  cin >> n >> d;
+
+  vpl v(n);
+  for (int i = 0; i < n; i++)
+  {
+    cin >> v[i].first >> v[i].second;
+  }
+
+  sort(all(v));
+
+  ll maxSum = 0, currSum = 0;
+  int l = 0, r = 0;
+
+  while (r < n)
+  {
+    while (r < n && v[r].first - v[l].first < d)
+    {
+      currSum += v[r].second;
+      r++;
+    }
+
+    if (currSum > maxSum)
+      maxSum = currSum;
+    
+    currSum -= v[l].second;
+    l++;
+  }
+
+  cout << maxSum << "\n";
 }

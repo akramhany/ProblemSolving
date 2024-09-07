@@ -83,4 +83,23 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--)
+  {
+    ll x, y, k;
+
+    cin >> x >> y >> k;
+
+    ll resX = ceil((double)x / k);
+    ll resY = ceil((double)y / k);
+
+    if (resX > resY)
+    {
+      cout << resX * 2 - 1 << "\n";
+    }
+    else
+      cout << resY * 2 << "\n";
+  }
 }

@@ -83,4 +83,31 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--)
+  {
+    int n;
+    cin >> n;
+
+    vector<int> res;
+
+    for (int i = 0; i < n; i++)
+    {
+      string s;
+      cin >> s;
+
+      for (int i = 0; i < 4; i++)
+      {
+        if (s[i] == '#')
+          res.push_back(i + 1);
+      }
+    }
+
+    reverse(res.begin(), res.end());
+    for (auto & i : res)
+      cout << i << " ";
+    cout << endl;
+  }
 }

@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <math.h>
 #include <vector>
@@ -9,21 +10,6 @@
 
 #define ll long long
 #define llu unsigned long long
-#define pii pair<int , int>
-#define lp(i, j, n) for (int i = j; i < n; i++)
-#define vi vector<int>
-#define vvi vector<vector<int>>
-#define vll vector<ll>
-#define vch vector<char>
-#define vvll vector<vector<ll>>
-#define vvch vector<vector<char>>
-#define vpi vector<pii>
-#define mp make_pair
-#define all(v) v.begin() , v. end()
-#define MAX 1e4+5
-#define rep(i, v) for(int i =0 ; i<v.size() ; i++)
-#define scn(v) for (auto& i : v)cin >> i;
-#define oo 1e18
 
 using namespace std;
 
@@ -41,6 +27,22 @@ bool isPrime(ll n)
   }
 
   return true;
+}
+
+ll isPrimeRetNum(ll n)
+{
+  if (n == 2)
+    return n;
+  else if (n < 2 || n % 2 == 0)
+    return n;
+
+  for (ll i = 3; i * i <= n; i += 2)
+  {
+    if (n % i == 0)
+      return i;
+  }
+
+  return n;
 }
 
 ll sumDivisors(ll n)
@@ -83,4 +85,38 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--)
+  {
+    int n;
+    cin >> n;
+
+    map<int, int> mp;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+    {
+      cin >> v[i];
+      mp[v[i]] = i;
+    }
+
+    vector<bool> aval(n, true);
+    for (int i = 1; i <= n; i++)
+    {
+      int indx = mp[i] - 1;
+      while (indx >= 0 && aval[indx] && v[indx] > v[indx + 1]) {
+        mp[v[indx]] = indx + 1;
+        mp[v[indx + 1]] = indx;
+        swap(v[indx], v[indx + 1]);
+        aval[indx] = false;
+        indx--;
+      }
+    }
+
+    for (auto & i : v)
+      cout << i << " ";
+
+    cout << "\n";
+  }
 }

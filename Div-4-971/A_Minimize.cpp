@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <math.h>
 #include <vector>
@@ -83,4 +84,21 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--)
+  {
+    int a, b;
+    cin >> a >> b;
+
+
+    int res = 1e9;
+    for (int i = a; i <= b; i++)
+    {
+      res = min(res, (i - a) + (b - i));
+    }
+
+    cout << res << "\n";
+  }
 }

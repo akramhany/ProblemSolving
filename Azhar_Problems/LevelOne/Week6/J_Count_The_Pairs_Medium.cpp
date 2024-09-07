@@ -6,6 +6,7 @@
 #include <string>
 #include <set>
 #include <cstring>
+#include <queue>
 
 #define ll long long
 #define llu unsigned long long
@@ -18,7 +19,6 @@
 #define vvll vector<vector<ll>>
 #define vvch vector<vector<char>>
 #define vpi vector<pii>
-#define mp make_pair
 #define all(v) v.begin() , v. end()
 #define MAX 1e4+5
 #define rep(i, v) for(int i =0 ; i<v.size() ; i++)
@@ -83,4 +83,61 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int n;
+  cin >> n;
+
+  vll v;
+  map<int, ll> mp;
+
+  for (int i = 0; i < n; i++)
+  {
+    int x;
+    cin >> x;
+    mp[x]++;
+
+    if (mp[x] == 1)
+      v.push_back(x);
+  }
+
+  if (v.size() == 1)
+  {
+    ll x = mp[v[0]];
+    cout << (x * (x - 1) / 2) << "\n";
+    return (0);
+  }
+
+  sort(v.begin(), v.end());
+
+ ll k = v[0] + v[v.size() - 1];
+
+  ll res = 0;
+  int l = 0, r = v.size() - 1;
+  while (l <= r)
+  {
+    if (v[r] * 2 == k)
+    {
+      res += (mp[v[r]] * (mp[v[r]] - 1) / 2);
+      r--;
+    }
+    else if (v[l] * 2 == k)
+    {
+      res += (mp[v[l]] * (mp[v[l]] - 1) / 2);
+      l++;
+    }
+    else if (v[l] + v[r] == k)
+    {
+      res += (mp[v[l]] * mp[v[r]]);
+      l++, r--;
+    }
+    else if (v[l] + v[r] > k)
+    {
+      r--;
+    }
+    else if (v[l] + v[r] < k)
+    {
+      l++;
+    }
+  }
+
+  cout << res << "\n";
 }

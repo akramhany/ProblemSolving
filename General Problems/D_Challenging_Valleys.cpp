@@ -9,21 +9,6 @@
 
 #define ll long long
 #define llu unsigned long long
-#define pii pair<int , int>
-#define lp(i, j, n) for (int i = j; i < n; i++)
-#define vi vector<int>
-#define vvi vector<vector<int>>
-#define vll vector<ll>
-#define vch vector<char>
-#define vvll vector<vector<ll>>
-#define vvch vector<vector<char>>
-#define vpi vector<pii>
-#define mp make_pair
-#define all(v) v.begin() , v. end()
-#define MAX 1e4+5
-#define rep(i, v) for(int i =0 ; i<v.size() ; i++)
-#define scn(v) for (auto& i : v)cin >> i;
-#define oo 1e18
 
 using namespace std;
 
@@ -41,6 +26,22 @@ bool isPrime(ll n)
   }
 
   return true;
+}
+
+ll isPrimeRetNum(ll n)
+{
+  if (n == 2)
+    return n;
+  else if (n < 2 || n % 2 == 0)
+    return n;
+
+  for (ll i = 3; i * i <= n; i += 2)
+  {
+    if (n % i == 0)
+      return i;
+  }
+
+  return n;
 }
 
 ll sumDivisors(ll n)
@@ -83,4 +84,34 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--) {
+    int n;
+    cin >> n;
+
+    vector<int> v(n);
+    for (auto & i : v)
+      cin >> i;
+
+    bool isDec = true, isInc = false;
+
+    int i = 0;
+    while (i < n - 1 && v[i] >= v[i + 1])
+      i++;
+    
+    if (i == n - 1) {
+      cout << "YES\n";
+      continue;;
+    }
+
+    while (i < n - 1 && v[i] <= v[i + 1])
+      i++;
+
+    if (i == n - 1)
+      cout << "YES\n";
+    else
+      cout << "NO\n";
+  }
 }

@@ -83,4 +83,30 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int n;
+  cin >> n;
+
+  vll v(n);
+  scn(v);
+
+  ll l = 0, r = 0;
+  ll dist = 0;
+  set<ll> st;
+
+  while (r < n)
+  {
+    while (st.count(v[r]) == 1)
+    {
+      st.erase(v[l]);
+      l++;
+    }
+
+    st.insert(v[r]);
+
+    dist += (r - l + 1);
+    r++;
+  }
+
+
+  cout << dist << "\n";
 }

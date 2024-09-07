@@ -78,9 +78,58 @@ ll lcm(ll a, ll b)
   return (ll)(a * b) / gcd(a, b);
 }
 
+ll calc(ll st, ll end, ll mid)
+{
+  ll pos = (mid * (mid + 1)) / 2 - (st * (st - 1)) / 2;
+  ll neg = (end * (end + 1)) / 2 - ((mid + 1) * mid) / 2;
+
+  return pos - neg;
+}
+
 int main()
 {
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--)
+  {
+    ll n, k;
+    cin >> n >> k;
+
+    ll st = k, end = k + n - 1;
+
+    ll l = st, r = end, currCalc = oo;
+    while (l <= r)
+    {
+      ll mid = (l + r) / 2;
+
+      ll val = calc(st, end, mid);
+
+      if (val > 0) {
+        r = mid - 1;
+        if (abs(val) < abs(currCalc))
+        {
+          currCalc = val;
+        }
+      }
+      else if (val < 0)
+      {
+        l = mid + 1;
+        if (abs(val) < abs(currCalc))
+        {
+          currCalc = val;
+        }
+      }
+      else
+      {
+        currCalc = 0;
+        break;
+      }
+    }
+
+    cout << abs(currCalc) << "\n";
+  }
 }

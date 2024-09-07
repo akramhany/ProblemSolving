@@ -24,6 +24,7 @@
 #define rep(i, v) for(int i =0 ; i<v.size() ; i++)
 #define scn(v) for (auto& i : v)cin >> i;
 #define oo 1e18
+#define M (ll)(1e9) + 7
 
 using namespace std;
 
@@ -78,9 +79,49 @@ ll lcm(ll a, ll b)
   return (ll)(a * b) / gcd(a, b);
 }
 
+// To compute x^y under modulo m
+ll power(ll x, ll y, ll m)
+{
+    if (y == 0)
+        return 1;
+
+    ll p = power(x, y / 2, m) % m;
+    p = (p * p) % m;
+
+    return (y % 2 == 0) ? p : (x * p) % m;
+}
+
 int main()
 {
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--) {
+    int n;
+    cin >> n;
+
+    vll v(n + 1, 0);
+    vll sumV(n + 1, 0);
+    for (int i = 1; i <= n; i++)
+    {
+      cin >> v[i];
+      sumV[i] = v[i] + sumV[i - 1];
+    }
+
+    ll sum = 0;
+    for (int i = 1; i < n; i++)
+    {
+      sum += (v[i] * (sumV[n] - sumV[i])) % (M);
+    }
+
+    ll div = (n - 1) * n / 2;
+
+    ll divInv = power(div, M - 2, M);
+
+    ll res = ((sum % (M)) * (divInv % (M))) % (M);
+    cout << res << "\n";
+  }
 }

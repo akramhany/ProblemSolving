@@ -6,6 +6,7 @@
 #include <string>
 #include <set>
 #include <cstring>
+#include <queue>
 
 #define ll long long
 #define llu unsigned long long
@@ -18,7 +19,6 @@
 #define vvll vector<vector<ll>>
 #define vvch vector<vector<char>>
 #define vpi vector<pii>
-#define mp make_pair
 #define all(v) v.begin() , v. end()
 #define MAX 1e4+5
 #define rep(i, v) for(int i =0 ; i<v.size() ; i++)
@@ -83,4 +83,41 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--) {
+    int n;
+    cin >> n;
+
+    vll v(n + 1, 0);
+    vll sum(n + 1, 0);
+    for (int i = 1; i <= n; i++)
+    {
+      cin >> v[i];
+      sum[i] = v[i] + sum[i - 1];
+    }
+
+    ll res = 0;
+    for (int i = 1; i <= n; i++)
+    {
+      int l = 0, r = 2;
+      while (l <= n - 2)
+      {
+        while (r <= n && sum[r] - sum[l] < v[i])
+        {
+          r++;
+        }
+
+        if (sum[r] - sum[l] == v[i] && r - l >= 2)
+        {
+          res++;
+          break;
+        }
+        l++;
+      }
+    }
+
+    cout << res << "\n";
+  }
 }

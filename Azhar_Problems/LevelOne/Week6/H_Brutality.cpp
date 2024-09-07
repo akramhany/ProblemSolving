@@ -6,6 +6,7 @@
 #include <string>
 #include <set>
 #include <cstring>
+#include <queue>
 
 #define ll long long
 #define llu unsigned long long
@@ -83,4 +84,38 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int n, k;
+  cin >> n >> k;
+
+  vi v(n);
+  scn(v);
+
+  string s;
+  cin >> s;
+
+  ll sum = 0;
+
+  int l = 0, r = 0;
+  while (r < n)
+  {
+    priority_queue<int> pq;
+    char c = s[l];
+
+    while (r < n && s[r] == c)
+    {
+      pq.push(v[r]);
+      r++;
+    }
+
+    int count = k;
+    while (count > 0 && !pq.empty())
+    {
+      sum += pq.top();
+      pq.pop();
+      count--;
+    }
+    l = r;
+  }
+
+  cout << sum << "\n";
 }

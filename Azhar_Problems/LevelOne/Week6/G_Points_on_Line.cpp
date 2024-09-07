@@ -6,6 +6,7 @@
 #include <string>
 #include <set>
 #include <cstring>
+#include <queue>
 
 #define ll long long
 #define llu unsigned long long
@@ -83,4 +84,36 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int n, k;
+  cin >> n >> k;
+
+  vi v(n);
+  scn(v);
+
+  if (n < 3)
+  {
+    cout << "0\n";
+    return (0);
+  }
+
+  int l = 0, r = 0;
+  ll res = 0;
+
+  while (l < n - 2)
+  {
+    while (r < n && v[r] - v[l] <= k)
+    {
+      r++;
+    }
+
+    ll diff = r - l - 2;
+    if (diff > 0)
+    {
+      res += (diff * (diff + 1)) / 2;
+    }
+
+    l++;
+  }
+
+  cout << res << "\n";
 }

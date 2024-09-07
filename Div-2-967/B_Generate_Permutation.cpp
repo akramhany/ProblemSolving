@@ -5,25 +5,11 @@
 #include <map>
 #include <string>
 #include <set>
+#include <queue>
 #include <cstring>
 
 #define ll long long
 #define llu unsigned long long
-#define pii pair<int , int>
-#define lp(i, j, n) for (int i = j; i < n; i++)
-#define vi vector<int>
-#define vvi vector<vector<int>>
-#define vll vector<ll>
-#define vch vector<char>
-#define vvll vector<vector<ll>>
-#define vvch vector<vector<char>>
-#define vpi vector<pii>
-#define mp make_pair
-#define all(v) v.begin() , v. end()
-#define MAX 1e4+5
-#define rep(i, v) for(int i =0 ; i<v.size() ; i++)
-#define scn(v) for (auto& i : v)cin >> i;
-#define oo 1e18
 
 using namespace std;
 
@@ -83,4 +69,36 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--)
+  {
+    int n;
+    cin >> n;
+
+    if (n % 2 == 0)
+    {
+      cout << "-1\n";
+      continue;
+    }
+
+    vector<int> perm(n);
+    int i = n / 2, j = (n / 2) + 1;
+    int val = 1;
+    while (i >= 0)
+    {
+      perm[i] = val++;
+      i--;
+    }
+
+    while (j < n)
+    {
+      perm[j] = val++;
+      j++;
+    }
+
+    for (auto & i : perm)
+      cout << i << "\n";
+  }
 }

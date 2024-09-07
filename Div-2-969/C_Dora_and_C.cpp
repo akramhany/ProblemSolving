@@ -83,4 +83,50 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--) {
+    int n, a, b;
+    cin >> n >> a >> b;
+
+    vll v(n);
+    scn(v);
+
+    if (n == 1)
+    {
+      cout << 0 << "\n";
+      continue;
+    }
+
+    ll g = gcd(a, b);
+
+    for (int i = 0; i < n; i++)
+    {
+      v[i] %= g;
+    }
+    sort(v.begin(), v.end());
+
+    ll res = oo;
+
+    for (int i = 0; i < n; i++)
+    {
+      ll num = (v[i] + g);
+      if (i == 0)
+      {
+        res = min(res, num - v[i + 1]);
+      }
+      else if (i == n - 1)
+      {
+        res = min(res, v[i] - v[0]);
+      }
+      else
+      {
+        res = min(res, min(num - v[0], num - v[i + 1]));
+      }
+    }
+
+    cout << res << "\n";
+
+  }
 }

@@ -83,4 +83,39 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int n;
+  cin >> n;
+
+  vector<int> v(n);
+  for (auto & i : v)
+    cin >> i;
+
+  int l = 0, r = n - 1;
+  int dist = 0;
+  while (l <= r)
+  {
+    while (l <= r && v[r] == v[r - 1])
+      r--;
+    while (l <= r && v[l] == v[l + 1])
+      l++;
+    if (abs(v[l]) == abs(v[r]))
+    {
+      dist++;
+      int x = abs(v[l]);
+      while (l <= r && abs(v[l]) == abs(v[r]) && abs(v[l]) == x)
+        l++, r--;
+    }
+    else if (abs(v[l]) > abs(v[r]))
+    {
+      dist++;
+      l++;
+    }
+    else
+    {
+      dist++;
+      r--;
+    }
+  }
+
+  cout << dist << "\n";
 }

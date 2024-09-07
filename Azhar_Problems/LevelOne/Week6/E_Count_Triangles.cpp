@@ -18,7 +18,7 @@
 #define vvll vector<vector<ll>>
 #define vvch vector<vector<char>>
 #define vpi vector<pii>
-#define mp make_pair
+#define m_p make_pair
 #define all(v) v.begin() , v. end()
 #define MAX 1e4+5
 #define rep(i, v) for(int i =0 ; i<v.size() ; i++)
@@ -83,4 +83,22 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int n;
+  cin >> n;
+
+  vi v(n);
+  scn(v);
+
+  map<int, int> mp;
+  rep(i, v) {
+    mp[v[i]]++;
+  }
+
+  ll res = 0;
+
+  lp(i, 0, v.size()) {
+    lp(j, i + 1, v.size()) {
+      
+    }
+  }
 }

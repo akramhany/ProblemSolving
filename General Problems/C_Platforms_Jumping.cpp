@@ -9,21 +9,6 @@
 
 #define ll long long
 #define llu unsigned long long
-#define pii pair<int , int>
-#define lp(i, j, n) for (int i = j; i < n; i++)
-#define vi vector<int>
-#define vvi vector<vector<int>>
-#define vll vector<ll>
-#define vch vector<char>
-#define vvll vector<vector<ll>>
-#define vvch vector<vector<char>>
-#define vpi vector<pii>
-#define mp make_pair
-#define all(v) v.begin() , v. end()
-#define MAX 1e4+5
-#define rep(i, v) for(int i =0 ; i<v.size() ; i++)
-#define scn(v) for (auto& i : v)cin >> i;
-#define oo 1e18
 
 using namespace std;
 
@@ -41,6 +26,22 @@ bool isPrime(ll n)
   }
 
   return true;
+}
+
+ll isPrimeRetNum(ll n)
+{
+  if (n == 2)
+    return n;
+  else if (n < 2 || n % 2 == 0)
+    return n;
+
+  for (ll i = 3; i * i <= n; i += 2)
+  {
+    if (n % i == 0)
+      return i;
+  }
+
+  return n;
 }
 
 ll sumDivisors(ll n)
@@ -83,4 +84,36 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int n, m, d;
+  cin >> n >> m >> d;
+
+  vector<int> woodLen(m);
+  for (auto & i : woodLen)
+    cin >> i;
+
+  vector<int> res(n, 0);
+  int i = 1;
+  int j = 0;
+  while (i <= n && j < m)
+  {
+    int pos = min(i + d - 1, n);
+    while (pos <= n && woodLen[j] != 0)
+    {
+      res[pos - 1] = j + 1;
+      pos++;
+      woodLen[j]--;
+    }
+
+    i = pos;
+    j++;
+  }
+
+  if (j == 0 && i <= n)
+    cout << "NO\n";
+  else
+  {
+    cout << "YES\n";
+    for (auto & i : res)
+      cout << i << " ";
+  }
 }

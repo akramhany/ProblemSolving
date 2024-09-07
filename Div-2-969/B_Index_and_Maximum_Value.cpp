@@ -83,4 +83,40 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--) {
+    int n, m;
+    cin >> n >> m;
+
+    ll max_num = 0;
+
+    vll v(n);
+    for (auto & i : v)
+    {
+      cin >> i;
+      max_num = max(max_num, i);
+    }
+
+    lp(i, 0, m) {
+      char c;
+      cin >> c;
+
+      int l, r;
+      cin >> l >> r;
+
+      if ((max_num >= l && max_num <= r))
+      {
+        if (c == '+')
+          max_num++;
+        else
+          max_num--;
+      }
+
+      cout << max_num << " ";
+    }
+
+    cout << "\n";
+  }
 }

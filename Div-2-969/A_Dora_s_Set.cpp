@@ -83,4 +83,23 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--) {
+    int l, r;
+    cin >> l >> r;
+
+    int res = 0;
+    for (int i = l; i <= r; i++)
+    {
+      if (i % 2 == 1 && i + 1 <= r && i + 2 <= r)
+      {
+        res++;
+        i += 3;
+      }
+    }
+
+    cout << res << "\n";
+  }
 }

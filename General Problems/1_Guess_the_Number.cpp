@@ -9,21 +9,6 @@
 
 #define ll long long
 #define llu unsigned long long
-#define pii pair<int , int>
-#define lp(i, j, n) for (int i = j; i < n; i++)
-#define vi vector<int>
-#define vvi vector<vector<int>>
-#define vll vector<ll>
-#define vch vector<char>
-#define vvll vector<vector<ll>>
-#define vvch vector<vector<char>>
-#define vpi vector<pii>
-#define mp make_pair
-#define all(v) v.begin() , v. end()
-#define MAX 1e4+5
-#define rep(i, v) for(int i =0 ; i<v.size() ; i++)
-#define scn(v) for (auto& i : v)cin >> i;
-#define oo 1e18
 
 using namespace std;
 
@@ -41,6 +26,22 @@ bool isPrime(ll n)
   }
 
   return true;
+}
+
+ll isPrimeRetNum(ll n)
+{
+  if (n == 2)
+    return n;
+  else if (n < 2 || n % 2 == 0)
+    return n;
+
+  for (ll i = 3; i * i <= n; i += 2)
+  {
+    if (n % i == 0)
+      return i;
+  }
+
+  return n;
 }
 
 ll sumDivisors(ll n)
@@ -78,9 +79,48 @@ ll lcm(ll a, ll b)
   return (ll)(a * b) / gcd(a, b);
 }
 
+bool validate(vector<ll> &v, ll k, ll c, ll d) {
+  ll currentCoins = 0;
+  while (d) {
+    ll counter = k;
+    ll i = v.size() - 1;
+    currentCoins += v[i];
+    i--;
+    d--;
+    while (counter && d) {
+      if (i >= 0)
+        currentCoins += v[i--];
+      counter--, d--;
+    }
+  }
+
+  return currentCoins >= c;
+}
+
 int main()
 {
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int l = 1, r = 1e6;
+  int res = -1;
+  while (l <= r)
+  {
+    int mid = (l + r ) / 2;
+    cout << mid << endl;
+    string op;
+    cin >> op;
+    if (op == "<")
+    {
+      r = mid - 1;
+    }
+    else
+    {
+      res = mid;
+      l = mid + 1;
+    }
+  }
+
+  cout << "! " << res << endl;
+  return (0);
 }

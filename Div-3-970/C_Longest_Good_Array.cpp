@@ -83,4 +83,29 @@ int main()
   cin.tie(0);
   cin.sync_with_stdio(0);
 
+  int t;
+  cin >> t;
+
+  while (t--) {
+    ll l, r;
+    cin >> l >> r;
+
+    ll res = 0, counter = 0;
+    while (l <= r)
+    {
+      if (l + counter <= r)
+        res++;
+      l += counter++;
+    }
+
+    cout << res << "\n";
+  }
+
 }
+
+/*
+
+i = 2
+i = p[2] = 3 = p[3] = 4 = p[4]
+
+*/
